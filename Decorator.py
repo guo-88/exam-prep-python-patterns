@@ -2,13 +2,9 @@ import streamlit as st
 import reveal_slides as rs
 from functools import wraps
 
-
-
-
-
-
+# ======================
 # 1. Теоретическая часть (слайды)
-
+# ======================
 def show_theory_slides():
     slides_md = """
     ## Паттерн Декоратор (Decorator Pattern)
@@ -18,7 +14,7 @@ def show_theory_slides():
     Альтернатива наследованию, соответствует принципу открытости/закрытости
     ---
     ### Компоненты паттерна
-
+   
     Component (абстрактный компонент)
     │
     ├── ConcreteComponent (конкретный компонент)
@@ -26,6 +22,7 @@ def show_theory_slides():
     └── Decorator (абстрактный декоратор)
         ├── ConcreteDecoratorA (конкретный декоратор)
         └── ConcreteDecoratorB
+    
     ---
     ### Преимущества и недостатки
     Преимущества  
@@ -42,7 +39,7 @@ def show_theory_slides():
     - Обработка I/O потоков (шифрование/сжатие/кэширование)
     - Веб-мидлвары (аутентификация/логирование)
     """
-
+    
     # Рендеринг слайдов
     rs.slides(
         slides_md,
@@ -54,13 +51,14 @@ def show_theory_slides():
             "center": True
         }
     )
+
 # ======================
 # 2. Реализация паттерна
 # ======================
 class TextComponent:
     def render(self) -> str:
         raise NotImplementedError
-      
+
 class PlainText(TextComponent):
     def init(self, text: str):
         self.text = text
@@ -104,19 +102,20 @@ def interactive_demo():
     if bold:
         component = BoldDecorator(component)
     component = ColorDecorator(component, color)
-
+    
     # Отображение результата
     st.markdown(
-        f'<div style="font-size:{font_size}px">{component.render()}</div>',
+        f'<div style="font-size:{font_size}px">{component.render()}</div>', 
         unsafe_allow_html=True
     )
-  
+
 # ======================
 # Основная программа
 # ======================
 def main():
     st.title("Демонстрация паттерна Декоратор")
     show_theory_slides()  # Показ теоретических слайдов
-    interactive_demo()  # Интерактивная демонстрация
+    interactive_demo()    # Интерактивная демонстрация
+
 if __name__ == "main":
     main()
